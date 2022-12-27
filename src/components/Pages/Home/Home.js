@@ -39,7 +39,7 @@ const Home = () => {
                                 Description
                             </th>
                             <th scope="col" className="py-3 px-6">
-                                Completed Task
+                                Action
                             </th>
                         </tr>
                     </thead>

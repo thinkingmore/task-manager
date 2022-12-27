@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const AddTask = () => {
+
+    const [file, setFile] = useState()
 
     const addTaskHandler = (e) =>{
        
@@ -8,11 +10,41 @@ const AddTask = () => {
         const form = e.target;
         const title = form.title.value;
         const desc = form.desc.value;
+        console.log(file);
+
+        const formData = new FormData();
+        formData.append('image', file);
+        fetch(`https://api.imgbb.com/1/upload?key=6027c0e2ead0a822e47c25d04bcae6d8`,{
+            method: 'POST',
+            body: formData
+        })
+        .then(res=> res.json())
+        .then(imgData=>{
+            if(imgData.success){
+                console.log(imgData.data.url);
+                const task = {
+                    title: title,
+                    description: desc,
+                    image: imgData.data.url
+                }
+                // save products information to the database
+                fetch("http://localhost:5000/tasks",{
+                    method: 'POST',
+                    headers: {
+                        'content-type' : 'application/json',
+                    },
+                    body: JSON.stringify(task)
+                })
+                .then(res=> res.json())
+                .then(result =>{
+                    console.log(result)
+                    
+                })
+            }
+        })
+        .catch(error => console.error(error));
         
-        const newTask = {
-            title: title,
-            description: desc
-        }
+        
     }
     return (
         <div>    
@@ -29,7 +61,7 @@ const AddTask = () => {
                 </div>
                 <div className="relative z-0 mb-6 w-full group">     
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
-                    <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file"/>
+                    <input type="file" filename={file} onChange={e => setFile(e.target.files[0])} accept="image/*" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input"/>
                 </div>
                 <div className="relative z-0 mb-6 w-full group">     
                     

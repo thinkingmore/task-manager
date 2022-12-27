@@ -1,14 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
+import { ThemeProvider } from 'next-themes';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './components/Routes/Routes';
+import { useTheme } from 'next-themes';
 
 function App() {
 
-  
-  return (
+   return (
     <div className="App">
-        <RouterProvider router={router}></RouterProvider>
+        <ThemeProvider defaultTheme='light'>
+          <RouterProvider router={router}></RouterProvider>
+        </ThemeProvider>   
     </div>
   );
 }

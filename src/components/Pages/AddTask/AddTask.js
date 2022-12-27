@@ -56,7 +56,7 @@ const AddTask = () => {
     return (
         <div>    
             <h2 className='mb-6 text-4xl'>Add a Task</h2>      
-            <form onSubmit={addTaskHandler} className='w-3/4 mx-auto'>
+            <form onSubmit={addTaskHandler} className='w-5/6 mx-auto'>
             <div className="grid md:grid-cols-3 md:gap-6">
                 <div>
                     <label htmlFor="Title" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>

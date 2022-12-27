@@ -34,6 +34,7 @@ const CompletedTask = () => {
 
     return (
         <div>
+            <h2 className='text-2xl my-6'>Completed Task</h2>
             <div className="overflow-x-auto relative">
                 <table className="w-3/4 mx-auto text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

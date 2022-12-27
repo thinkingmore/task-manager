@@ -1,10 +1,13 @@
 import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const AddTask = () => {
 
     const {user} = useContext(AuthContext);
     const [file, setFile] = useState();
+
+    const navigate = useNavigate();
 
     const addTaskHandler = (e) =>{
        
@@ -43,6 +46,7 @@ const AddTask = () => {
                     console.log(result)
                     
                 })
+                
             }
         })
         .catch(error => console.error(error));

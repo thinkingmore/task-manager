@@ -1,10 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Home = () => {
 
     const {user} = useContext(AuthContext);
     const [ task, setTask] = useState([]);
+
+    const navigate= useNavigate();
+    const form = "/";
 
     useEffect(()=>{
         fetch(`http://localhost:5000/tasks/${user?.email}`)
@@ -18,13 +22,16 @@ const Home = () => {
         })
         .then(res => res.json())
         .then(data => {
-           console.log(data);
+           console.log(data)
+           navigate(form, {replace: true})
             
         })
+        
         .catch(error=> console.error(error))
     }
     return (
         <div>
+            <h2 className='text-2xl my-6'>My Task</h2>
             <div className="overflow-x-auto relative">
                 <table className="w-3/4 mx-auto text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

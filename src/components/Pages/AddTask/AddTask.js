@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../../../contexts/AuthProvider';
 
 const AddTask = () => {
 
-    const [file, setFile] = useState()
+    const {user} = useContext(AuthContext);
+    const [file, setFile] = useState();
 
     const addTaskHandler = (e) =>{
        
@@ -23,6 +25,7 @@ const AddTask = () => {
             if(imgData.success){
                 console.log(imgData.data.url);
                 const task = {
+                    user: user?.email,
                     title: title,
                     description: desc,
                     image: imgData.data.url

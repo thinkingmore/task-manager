@@ -8,7 +8,7 @@ const Home = () => {
     const [ task, setTask] = useState([]);
 
     const navigate= useNavigate();
-    const form = "/";
+    
 
     useEffect(()=>{
         fetch(`http://localhost:5000/tasks/${user?.email}`)
@@ -23,7 +23,7 @@ const Home = () => {
         .then(res => res.json())
         .then(data => {
            console.log(data)
-           navigate(form, {replace: true})
+           navigate('/comtask')
             
         })
         

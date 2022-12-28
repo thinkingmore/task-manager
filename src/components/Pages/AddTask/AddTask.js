@@ -31,6 +31,7 @@ const AddTask = () => {
                     user: user?.email,
                     title: title,
                     description: desc,
+                    status: "incomplete",
                     image: imgData.data.url
                 }
                 // save products information to the database
@@ -44,7 +45,7 @@ const AddTask = () => {
                 .then(res=> res.json())
                 .then(result =>{
                     console.log(result)
-                    
+                    navigate('/');
                 })
                 
             }
